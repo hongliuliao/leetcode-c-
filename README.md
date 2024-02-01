@@ -1,2 +1,2 @@
-# leetcode-c-
-leetcode Solutions use c++ language
+# leetcode-cpp
+leetcode Solutions use c++ language with testcase
