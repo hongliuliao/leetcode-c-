@@ -1,5 +1,6 @@
 #include <vector>
 #include <iostream>
+#include "utils/test_assert.h"
 
 using std::vector;
 
@@ -23,5 +24,5 @@ int search(vector<int>& nums, int target) {
 int main() {
     std::vector<int> nums = {-1,0,3,5,9,12};
     int num = search(nums, 3);
-    std::cout << num << std::endl;
+    ASSERT_EQUAL(2, num);
 }
