@@ -1,32 +1,29 @@
 #include <iostream>
 #include <utility> 
-
-struct ListNode {
-    int val;
-    ListNode* next{nullptr};
-};
+#include "utils/list_util.h"
+#include "utils/test_assert.h"
 
 std::pair<ListNode*, ListNode*> reverse_list(ListNode* head, ListNode* tail) {
     ListNode* pre = nullptr;
     ListNode* cur = head;
     std::cout << "start reverse_list, head:" << head->val << ", tail:" << tail->val << std::endl;
-    if (tail->next) {
-        std::cout << "start reverse_list, tail next:" << tail->next->val << std::endl;
-    }
+    //if (tail->next) {
+        //std::cout << "start reverse_list, tail next:" << tail->next->val << std::endl;
+    //}
     ListNode* tail_next = tail->next;
     while (cur && cur != tail_next) {
         ListNode* next = cur->next;
-        std::cout << "reverse_list, cur:" << cur->val << std::endl;
+        //std::cout << "reverse_list, cur:" << cur->val << std::endl;
         cur->next = pre;
         pre = cur;
         cur = next; 
         //std::cout << "reverse_list over, cur:" << cur->val << std::endl;
-        if (tail_next) {
-            std::cout << "reverse_list over, tail->next:" << tail_next->val << std::endl;
-        }   
+        //if (tail_next) {
+            //std::cout << "reverse_list over, tail->next:" << tail_next->val << std::endl;
+        //}   
     }
-    std::cout << "reverse_list end, new head:" << pre->val << std::endl;
-    std::cout << "reverse_list end, new tail:" << head->val << std::endl;
+    //std::cout << "reverse_list end, new head:" << pre->val << std::endl;
+    //std::cout << "reverse_list end, new tail:" << head->val << std::endl;
     return {pre, head};
 }
 
@@ -76,22 +73,12 @@ void print_list(ListNode* head) {
 }
 
 int main() {
-    ListNode node1;
-    node1.val = 1;
-    ListNode node2;
-    node2.val = 2;
-    ListNode node3;
-    node3.val = 3;
-    ListNode node4;
-    node4.val = 4;
-    ListNode node5;
-    node5.val = 5;
-    node1.next = &node2;
-    node2.next = &node3;
-    node3.next = &node4;
-    node4.next = &node5;
-
-    ListNode* newhead = reverse_group(&node1, 2);
+    std::vector<int> nodes = {1, 2, 3, 4, 5};
+    ListNode* newhead = reverse_group(create_list(nodes), 2);
     print_list(newhead);
+    std::vector<int> except_nodes = {2, 1, 4, 3, 5};
+    ASSERT_LIST_EQUAL(create_list(except_nodes), newhead);
     return 0;
 }
+
+// g++ src/25_reverse_group.cpp src/utils/*.cpp && ./a.out
