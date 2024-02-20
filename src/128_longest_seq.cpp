@@ -7,8 +7,7 @@ int longestConsecutive(std::vector<int>& nums) {
     int max = 0;
     std::unordered_set<int> num_cnt_set;
     for (int i = 0; i < nums.size(); i++) {
-        int cur = nums[i];
-        num_cnt_set.insert(cur);
+        num_cnt_set.insert(nums[i]);
     }
     
     for (int num : num_cnt_set) {
@@ -17,7 +16,7 @@ int longestConsecutive(std::vector<int>& nums) {
         int seq = 1;
         if (!num_cnt_set.count(left)) {
             while (num_cnt_set.count(right)) {
-                num_cnt_set.erase(right);
+                num_cnt_set.erase(right); // 一个优化点, 减少无效计算
                 seq++;
                 right++;
             }

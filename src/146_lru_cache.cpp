@@ -10,31 +10,29 @@ struct LinkedListNode {
 
 class LinkedList {
 public:
-    LinkedList() {
-        
-    }
+    LinkedList() {}
     ~LinkedList() {
-        LinkedListNode* tmp = head;
+        LinkedListNode* tmp = _head;
         while (tmp) {
             LinkedListNode* del_node = tmp;
             tmp = tmp->next;
             delete del_node;
         }
     }
-    LinkedListNode* head{nullptr};
-    LinkedListNode* tail{nullptr};
+    LinkedListNode* _head{nullptr};
+    LinkedListNode* _tail{nullptr};
 
     void add_head(LinkedListNode* node) {
-        if (!head) {
-            head = node;
-            tail = node;
+        if (!_head) {
+            _head = node;
+            _tail = node;
             //std::cout << "add node:" << node->key
             //<< ", head:" << head << ", tail:" << tail << std::endl;
             return;
         }
-        node->next = head;
-        head->pre = node;
-        head = node;
+        node->next = _head;
+        _head->pre = node;
+        _head = node;
         //std::cout << "add node:" << node->key
         //    << ", head:" << head << ", tail:" << tail << std::endl;
     }
@@ -45,11 +43,11 @@ public:
         if (node->next) {
             node->next->pre = node->pre;
         }
-        if (node == head) {
-            head = node->next;
+        if (node == _head) {
+            _head = node->next;
         }
-        if (node == tail) {
-            tail = node->pre;
+        if (node == _tail) {
+            _tail = node->pre;
         } 
         //std::cout << "del node:" << node->key << ", head:" << head << ", tail:" << tail << std::endl;
     }
@@ -66,7 +64,7 @@ public:
             return -1;
         }
         LinkedListNode* node = _kv[key];
-        if (node != _list.head) {
+        if (node != _list._head) {
             _list.del_node(node);
             _list.add_head(node);
         }
@@ -76,9 +74,9 @@ public:
     void put(int key, int value) {
         if (_kv.count(key) == 0 && _kv.size() >= _capacity) {
             //std::cout << "remove tail node:" << _list.tail->key << std::endl;
-            if (_list.tail) {
-                _kv.erase(_list.tail->key);
-                LinkedListNode* last_node = _list.tail;
+            if (_list._tail) {
+                _kv.erase(_list._tail->key);
+                LinkedListNode* last_node = _list._tail;
                 _list.del_node(last_node);
                 delete last_node;
             }

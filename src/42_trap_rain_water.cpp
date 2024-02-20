@@ -21,7 +21,7 @@ int trap(std::vector<int>& height) {
     return total;
 }
 
-int main(){
+int main() {
     std::vector<int> heights = {0,1,0,2,1,0,1,3,2,1,2,1};
     int num = trap(heights);
     ASSERT_EQUAL(6, num);
