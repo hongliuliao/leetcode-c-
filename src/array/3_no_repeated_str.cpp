@@ -17,7 +17,7 @@ int lengthOfLongestSubstring(std::string s) {
                 break;
             }   
             set.insert(s[j]);
-            //std::cout << "insert no repeat char:" << s[j] << std::endl;
+            std::cout << "insert no repeat char:" << s[j] << std::endl;
         }
         max = std::max(max, (int)set.size());
     }
